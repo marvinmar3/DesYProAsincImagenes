@@ -14,10 +14,10 @@ public class Main {
         try {
             List<String> urls = Files.readAllLines(Paths.get("urls.txt"));
 
-            // 🧵 Executor para descargas
+            // executor para descargas
             ExecutorService executorDescarga = Executors.newFixedThreadPool(5);
 
-            // 🧵 Executor para filtros
+            // executor para filtros
             ExecutorService executorFiltros = Executors.newFixedThreadPool(10);
 
             for (String url : urls) {
@@ -37,9 +37,8 @@ public class Main {
                 });
             }
 
-            // Esperar a que terminen TODAS las descargas antes de apagar el executor de filtros
             executorDescarga.shutdown();
-            executorDescarga.awaitTermination(10, TimeUnit.MINUTES); // ajusta según tu caso
+            executorDescarga.awaitTermination(10, TimeUnit.MINUTES);
 
             executorFiltros.shutdown();
             executorFiltros.awaitTermination(10, TimeUnit.MINUTES);
